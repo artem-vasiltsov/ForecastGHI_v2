@@ -105,6 +105,9 @@ class PostgresManage:
 
     def insert_forecast_visualization(self, t_stamp, y_value):
 
+        del_query = "delete from forecast_visualization_khars"
+        self.cur.execute(del_query)
+
         time_stamp = t_stamp
         for item in y_value:
 
