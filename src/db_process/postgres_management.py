@@ -26,7 +26,9 @@ class PostgresManage:
             CREATE TABLE IF NOT EXISTS public.average_x_value_khars(
                 ID SERIAL PRIMARY KEY,                 
                 TSTAMP timestamp NOT NULL,
-                GHI_10_AVERAGE real NOT NULL
+                GHI_10_AVERAGE real NOT NULL,
+                DHI_10_AVERAGE real NOT NULL,
+                DNI_10_AVERAGE real NOT NULL 
             )
             """
         )
@@ -79,10 +81,11 @@ class PostgresManage:
 
         return avg_x_dict
 
-    def insert_average_x_value(self, x_val, t_stamp):
+    def insert_average_x_value(self, ghi_x_val, dhi_x_val, dni_x_val, t_stamp):
 
-        insert_query = """insert into average_x_value_khars (TSTAMP, GHI_10_AVERAGE) values (%s, %s)"""
-        record_insert = (t_stamp, x_val)
+        insert_query = "insert into average_x_value_khars (TSTAMP, GHI_10_AVERAGE, DHI_10_AVERAGE, DNI_10_AVERAGE) " \
+                       "values (%s, %s, %s, %s)"
+        record_insert = (t_stamp, ghi_x_val, dhi_x_val, dni_x_val)
         self.cur.execute(insert_query, record_insert)
 
         self.conn.commit()

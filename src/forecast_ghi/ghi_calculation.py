@@ -26,8 +26,9 @@ class ForecastGHI:
 
         while True:
 
-            st_ghi_value, str_dt_time = extract_time_ghi_value(dt_time=current_time)
-            self.db_manage.insert_average_x_value(x_val=st_ghi_value, t_stamp=str_dt_time)
+            st_ghi_value, st_dhi_value, st_dni_value, str_dt_time = extract_time_ghi_value(dt_time=current_time)
+            self.db_manage.insert_average_x_value(ghi_x_val=st_ghi_value, dhi_x_val=st_dhi_value,
+                                                  dni_x_val=st_dni_value, t_stamp=str_dt_time)
             current_time += datetime.timedelta(hours=1, minutes=0, seconds=0)
             self.get_y_value()
 
